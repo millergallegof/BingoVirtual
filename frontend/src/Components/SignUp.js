@@ -1,32 +1,70 @@
+/* Import of required packages */
 import React, { Component } from 'react'
 import axios from 'axios'
 import appConfig from '../appConfig'
 
+/* Boostrap styles */
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+/**
+* [Class that renders a format for the user to register and send the information to the mongo database.]
+*
+*
+* @version 1.01.00
+*
+* @author Miller Esteban Gallego Forero
+*
+* @since Available from version 1
+*
+*/
 export default class SignUp extends Component {
   constructor(props) {
-    //Inicializar el constructor
+    /* Initialize the constructor */
     super(props)
-    //Bindign function
+    /* Bindign functiona */
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.changeStateApp = this.props.onTryLogin;
-    //Components definition
+    /* Components definition */
     this.state = {
       email: '',
       password: ''
     }
   }
 
-  //manejo del 
+  /**
+    * [Method that reacts with the 'Click' event which sends the new user information.]
+    *
+    *
+    * 
+    * 
+    * @throws error in presenting the pledge
+    *
+    * @author Miller Esteban Gallego Forero - miller.gallegof@gmail.com
+    *
+    * @since Version 1
+    *
+    *
+    */
   async handleClick() {
-
     axios.post(appConfig.urlBackendLogin + '/user', this.state).then(res => res.data)
     this.changeStateApp(true, this.state.email)
   }
 
-  //manipular cuando se cambia algo
+
+  /**
+    * [Method which implements the saving of changes in an object which will be sent to the database with the previous method.]
+    *
+    *
+    * @param e stores the value that is sent when an event occurs.
+    * 
+    * @throws error in presenting the pledge
+    *
+    * @author Miller Esteban Gallego Forero - miller.gallegof@gmail.com
+    *
+    * @since Version 1
+    *
+    */
   async handleChange(e) {
     if (e.target.name === 'username') {
       await this.setState({
@@ -39,6 +77,20 @@ export default class SignUp extends Component {
     }
   }
 
+  /**
+    * [Renders the form for new user registration using methods to store the entered data in an object.]
+    *
+    *
+    * @return Renders the elements of the previous methods plus the page header.
+    * 
+    * @throws error in presenting the pledge
+    *
+    * @author Miller Esteban Gallego Forero - miller.gallegof@gmail.com
+    *
+    * @since Version 1
+    *
+    *
+    */
   render() {
     return (
       <div className='container ' style={{ marginTop: '100px' }}>

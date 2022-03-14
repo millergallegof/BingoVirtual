@@ -38,5 +38,9 @@
 }
 
 .border:hover {
-  border: 10px solid #000000!important;
+  border: 5px solid #000000!important;
+}
+
+.td:hover {
+  width: '100px'
 }

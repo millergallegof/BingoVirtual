@@ -1,29 +1,54 @@
-import React, { Component, useState } from 'react'
+/* Import of required packages */
+import React, { Component } from 'react'
 import axios from 'axios'
+
+/* Import of package elements */
 import appConfig from '../appConfig'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+/* Boostrap styles */
+import '../css/styles.css';
 
-
+/**
+* [Class which renders the elements for a login, validating email and password for the logged in.]
+*
+*
+* @version 1.01.00
+*
+* @author Miller Esteban Gallego Forero
+*
+* @since Available from version 1
+*
+*/
 export default class Login extends Component {
     constructor(props) {
-        //Inicializar el constructor
+        /* Initialize the constructor */
         super(props)
-        //Bindign functiona
+        /* Bindign functiona */
         this.handleChange = this.handleChange.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.changeStateApp = this.props.onTryLogin;
-        //Components definition
+        /* Components definition */
         this.state = {
             email: '',
             password: ''
         }
     }
 
-    //manejo del 
+    /**
+    * [Method that reacts with the 'Click' event makes an axios request to the Mongo DB to send elements and validate the logged.]
+    *
+    *
+    * 
+    * 
+    * @throws error in presenting the pledge
+    *
+    * @author Miller Esteban Gallego Forero - miller.gallegof@gmail.com
+    *
+    * @since Version 1
+    *
+    *
+    */
     async handleClick() {
-        // const [email, setEmail] = useState('')
-
         let response = await axios.post(appConfig.urlBackendLogin + '/users/user', this.state)
         if (response.data.length === 1) {
             console.log(response.data[0].email);
@@ -34,7 +59,22 @@ export default class Login extends Component {
 
     }
 
-    //manipular cuando se cambia algo
+
+    /**
+    * [Method that manipulates the information that is being entered into the form, 
+    *       stores it in an object to send it to validation with the previous method.]
+    *
+    *
+    * @param e stores the value that is sent when an event occurs.
+    * 
+    * @throws error in presenting the pledge
+    *
+    * @author Miller Esteban Gallego Forero - miller.gallegof@gmail.com
+    *
+    * @since Version 1
+    *
+    *
+    */
     async handleChange(e) {
         if (e.target.name === 'username') {
             await this.setState({
@@ -47,6 +87,20 @@ export default class Login extends Component {
         }
     }
 
+    /**
+    * [Renders the elements for the user to enter email and password to validate if he/she is registered.]
+    *
+    *
+    * @return Renders the elements of the previous methods plus the page header.
+    * 
+    * @throws error in presenting the pledge
+    *
+    * @author Miller Esteban Gallego Forero - miller.gallegof@gmail.com
+    *
+    * @since Version 1
+    *
+    *
+    */
     render() {
         return (
             <div className='container ' style={{ marginTop: '100px' }}>
